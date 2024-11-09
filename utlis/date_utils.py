@@ -14,8 +14,8 @@ def parse_dutch_date(date_str, months):
         current_year = datetime.now().year
         current_month = datetime.now().month
 
-        # Default to next year if currently Q4 and event is in Q1
-        if current_month >= 10 and month in ["01", "02", "03"]:
+        # Default to next year if currently H2 and event is in H1
+        if current_month >= 7 and month in ["01", "02", "03", "04", "05", "06"]:
             year = str(current_year + 1)
         else:
             year = str(current_year)
