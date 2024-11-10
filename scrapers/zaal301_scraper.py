@@ -78,7 +78,8 @@ def scrape_zaal301(url=venues["Zaal 100"], max_events=None):
             "description": description
         })
 
-        if n_events >= max_events:
+        # Stop if max_events is reached
+        if max_events is not None and len(events) >= max_events:
             return events
 
     return events

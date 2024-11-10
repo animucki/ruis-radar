@@ -10,7 +10,7 @@ venues = {
     "Nieuwe Anita": "https://denieuweanita.nl/",
     "Volkshotel/Doka": "https://www.volkshotel.nl/agenda/",
     "Vondelbunker": "https://radar.squat.net/nl/amsterdam/vondelbunker/events",
-    "Teatro Munganga": "https://munganga.nl/programma-categorie/actueel",
+    "Munganga": "https://munganga.nl/programma-categorie/actueel",
     "Dokzaal": "https://plantagedok.nl/events/",
     "OT301": "https://www.ot301.nl/agenda",
     "De Ruimte": "https://www.cafederuimte.nl/",

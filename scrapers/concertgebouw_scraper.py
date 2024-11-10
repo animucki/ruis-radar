@@ -32,7 +32,7 @@ def scrape_concertgebouw(url=venues["Concertgebouw"], page=1, max_events=None):
 
             # Event time (if present)
             time_element = event_item.select_one("time")
-            time = time_element.get_text(strip=True) if time_element else "No time available"
+            time = time_element.get_text(strip=True) if time_element else ""
 
             # Event image (if present)
             img_element = event_item.select_one("img")

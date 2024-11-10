@@ -5,7 +5,7 @@ from config import dutch_months_long, venues
 from utlis.date_utils import parse_dutch_date
 
 
-def _get_event_times(event_url):
+def _get_event_time(event_url):
     # Navigate to the event's ticket page to retrieve start and end times.
     response = requests.get(event_url)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -17,10 +17,8 @@ def _get_event_times(event_url):
         time = row.select_one("td b").get_text(strip=True) if row.select_one("td b") else None
         if "Aanvang" in label:
             start_time = time.replace("u", "")
-        elif "+/- einde" in label:
-            end_time = time.replace("u", "")
 
-    return start_time, end_time
+    return start_time
 
 
 def scrape_bimhuis(url=venues["Bimhuis"], max_events=None):
@@ -44,24 +42,18 @@ def scrape_bimhuis(url=venues["Bimhuis"], max_events=None):
 
         # Event description (sub-title)
         description_element = event_item.select_one("div.sub-title")
-        description = description_element.get_text(strip=True) if description_element else "No description available"
+        description = description_element.get_text(strip=True) if description_element else ""
 
         # Image URL (optional)
         img_element = event_item.select_one("img.load-img")
         img_url = img_element["data-src"] if img_element else None
 
         # Fetch start and end times from the event's ticket page
-        start_time, end_time = _get_event_times(link)
+        time = _get_event_time(link)
 
-        # past event, don't ned to scrape
-        if start_time is None:
+        # past event, don't ned to scraped
+        if time is None:
             continue
-
-        # end time may or may not be known
-        if end_time is None:
-            time = start_time
-        else:
-            time = start_time + "-" + end_time
 
         # Append event data to the list
         events.append({
