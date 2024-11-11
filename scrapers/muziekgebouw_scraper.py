@@ -23,7 +23,7 @@ def scrape_muziekgebouw(url=venues["Muziekgebouw"], page=1, max_events=None):
     events = []
 
     # Find each event listing in the <ul class="listItems variant-normal">
-    for n_events, event_item in enumerate(soup.select("ul.listItems.variant-normal li.eventCard")):
+    for event_item in soup.select("ul.listItems.variant-normal li.eventCard"):
         # Check for Bimhuis venue and skip if found
         venue_element = event_item.select_one("div.venue")
         if venue_element and "Bimhuis" in venue_element.get_text(strip=True):
@@ -79,7 +79,7 @@ def scrape_muziekgebouw(url=venues["Muziekgebouw"], page=1, max_events=None):
             "description": description
         })
 
-        if (max_events is not None) and (n_events >= max_events):
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events

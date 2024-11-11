@@ -17,7 +17,7 @@ def scrape_munganga(url=venues["Munganga"], max_events=None):
     events = []
 
     # Loop through each event item
-    for n_events, event in enumerate(soup.select("li.product")):
+    for event in soup.select("li.product"):
         # Event link and title
         link_element = event.select_one("a.woocommerce-LoopProduct-link")
         link = link_element["href"] if link_element else "#"
@@ -71,7 +71,7 @@ def scrape_munganga(url=venues["Munganga"], max_events=None):
         })
 
         # Stop if max_events is reached
-        if max_events is not None and len(events) >= max_events:
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events

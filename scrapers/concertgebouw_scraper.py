@@ -14,7 +14,6 @@ def scrape_concertgebouw(url=venues["Concertgebouw"], page=1, max_events=None):
     soup = BeautifulSoup(response.text, "html.parser")
 
     events = []
-    n_events = 0
 
     # Find each day section
     for day_section in soup.select("li.c-event-overview-list-item-day"):
@@ -64,8 +63,7 @@ def scrape_concertgebouw(url=venues["Concertgebouw"], page=1, max_events=None):
                 "description": "; ".join(description)
             })
 
-            n_events += 1
-            if (max_events is not None) and (n_events >= max_events):
+            if (max_events is not None) and (len(events) >= max_events):
                 return events
 
     return events

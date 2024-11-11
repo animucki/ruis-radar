@@ -60,7 +60,7 @@ def scrape_nieuwe_anita(url=venues["Nieuwe Anita"], max_events=None):
 
     events = []
 
-    for n_events, event in enumerate(container.select("div.vc_grid-item")):
+    for event in container.select("div.vc_grid-item"):
         title_element = event.select_one("h6 a")
         title = title_element.get_text(strip=True) if title_element else ""
         link = title_element["href"] if title_element else "#"
@@ -87,7 +87,7 @@ def scrape_nieuwe_anita(url=venues["Nieuwe Anita"], max_events=None):
             "description": short_description
         })
 
-        if max_events is not None and len(events) >= max_events:
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events

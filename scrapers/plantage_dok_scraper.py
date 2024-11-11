@@ -26,14 +26,14 @@ def scrape_plantage_dok(url=venues["Dokzaal"], month=None):
         link = event["href"]
 
         response = requests.get(link)
-        soup = BeautifulSoup(response.text, "html.parser")
+        event_soup = BeautifulSoup(response.text, "html.parser")
 
-        picture_element = soup.select_one("img.wp-post-image")
+        picture_element = event_soup.select_one("img.wp-post-image")
         img_url = picture_element["src"] if picture_element is not None else ""
 
-        title = soup.select_one("h1.tribe-events-single-event-title").get_text()
+        title = event_soup.select_one("h1.tribe-events-single-event-title").get_text()
 
-        datetime_str = soup.select_one("span.tribe-event-date-start").get_text()
+        datetime_str = event_soup.select_one("span.tribe-event-date-start").get_text()
         date_str, time_str = datetime_str.split(" @ ")
 
         # Infer year from calendar url (might bug out near New Year's but whatever)

@@ -30,7 +30,7 @@ def scrape_cinetol(url=venues["Cinetol"], max_events=None):
     events = []
 
     # Find each month of events
-    for n_events, month_div in enumerate(soup.select("div.sep_month_events")):
+    for month_div in soup.select("div.sep_month_events"):
         for event in month_div.select("div.event"):
             # Event link and title
             link = event.select_one("a[itemprop='url']")["href"]

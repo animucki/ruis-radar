@@ -27,7 +27,7 @@ def scrape_vondelbunker(url=venues["Vondelbunker"], max_events=None):
     events = []
 
     # Loop through each row in the table's tbody
-    for n_events, row in enumerate(table.select("tbody tr")):
+    for row in table.select("tbody tr"):
         # Date information
         date_text = row.select_one("div.date").get_text(strip=True)
         date_element = row.select_one("[property='schema:startDate']")
@@ -65,7 +65,7 @@ def scrape_vondelbunker(url=venues["Vondelbunker"], max_events=None):
         })
 
         # Stop if max_events is reached
-        if max_events is not None and len(events) >= max_events:
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events

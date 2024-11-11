@@ -16,7 +16,7 @@ def _get_image_url(event_url):
         return img_element["src"]
     return ""  # Return empty if no image is found
 
-def scrape_zaal301(url=venues["Zaal 100"], max_events=None):
+def scrape_zaal100(url=venues["Zaal 100"], max_events=None):
     # Fetch the webpage
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -25,7 +25,7 @@ def scrape_zaal301(url=venues["Zaal 100"], max_events=None):
     events = []
 
     # Find each event
-    for n_events, event in enumerate(soup.select("article.agenda-item")):
+    for event in soup.select("article.agenda-item"):
 
         link_element = event.select_one("a")
         if link_element:
@@ -79,7 +79,7 @@ def scrape_zaal301(url=venues["Zaal 100"], max_events=None):
         })
 
         # Stop if max_events is reached
-        if max_events is not None and len(events) >= max_events:
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events

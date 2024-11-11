@@ -22,7 +22,7 @@ def scrape_occii(url=venues["Occii"], max_events=None):
     events = []
 
     # Find each event in the OCCII events container
-    for n_events, event in enumerate(soup.select("div.occii-event-display")):
+    for event in soup.select("div.occii-event-display"):
         # Event image URL
         img_element = event.select_one("div.occii-event-display-image img")
         img_url = img_element["src"] if img_element else None
@@ -53,7 +53,7 @@ def scrape_occii(url=venues["Occii"], max_events=None):
             "description": description
         })
 
-        if (max_events is not None) and (n_events >= max_events):
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events

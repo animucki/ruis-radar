@@ -29,7 +29,7 @@ def scrape_bimhuis(url=venues["Bimhuis"], max_events=None):
     events = []
 
     # Find each event item in the main agenda
-    for n_events, event_item in enumerate(soup.select("ul.items li.maand")):
+    for event_item in soup.select("ul.items li.maand"):
         # Event title
         name = event_item.select_one("h3").get_text(strip=True)
 
@@ -66,7 +66,7 @@ def scrape_bimhuis(url=venues["Bimhuis"], max_events=None):
             "description": description
         })
 
-        if (max_events is not None) and (n_events >= max_events):
+        if (max_events is not None) and (len(events) >= max_events):
             return events
 
     return events
