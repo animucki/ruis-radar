@@ -13,7 +13,6 @@ def scrape_ot301(url=venues["OT301"], max_events=None):
     # List to store events
     events = []
 
-    # Find each event in the OCCII events container
     for event in soup.select("a.event-item"):
         # First get the link
         link = requests.compat.urljoin(url, event["href"])
